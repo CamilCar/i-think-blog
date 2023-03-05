@@ -11,6 +11,7 @@ class PostList(generic.ListView):
     template_name = "index.html"
     paginate_by = 6
 
+
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
@@ -64,11 +65,11 @@ class PostDetail(View):
             },
         )
 
+
 class PostLike(View):
-
-    def post(self, request, slug):
+    
+    def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
-
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
